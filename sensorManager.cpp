@@ -1,0 +1,38 @@
+#include "sensorManager.hpp"
+#include <iostream>
+
+using namespace std;
+
+
+void SensorManager::addSensor( shared_ptr< Sensor > sensor ){
+    sensors.push_back( sensor );
+}
+
+void SensorManager::readAll() {
+    for ( const auto& sensor : sensors ){
+        string name = sensor->getName();
+        double value = sensor->readValue();
+        if ( name == "Temperature" ){
+            this->temp = value;
+        }
+        if ( name == "RPM" ){
+            this->rpm = value;
+        }
+        if ( name == "Voltage" ){
+            this->voltage = value;
+        }
+        cout << name << " : " << value << endl;
+    }
+}
+
+double SensorManager::getVoltage() const {
+    return this->voltage;
+}
+
+double SensorManager::getRpm() const {
+    return this->rpm;
+}
+
+double SensorManager::getTemp() const {
+    return this->temp;
+}
