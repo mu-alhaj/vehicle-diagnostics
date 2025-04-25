@@ -1,5 +1,9 @@
 #pragma once
 
+/*
+    sensor manager should be able to start/restart, calibrate sensors. As well as collecting raw data from sensors.
+*/
+
 #include <vector>
 #include <memory>
 #include "sensor.hpp"

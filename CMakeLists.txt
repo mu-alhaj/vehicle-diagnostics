@@ -3,12 +3,28 @@ project(VehicleDiagnostics)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(diagnostics_app
-    main.cpp
-    sensor.cpp
-    sensorManager.cpp
-    safetyManager.cpp
-    tempSensor.cpp
-    rpmSensor.cpp
-    voltageSensor.cpp
-    )
+# Define include directories for headers
+include_directories(
+    ${PROJECT_SOURCE_DIR}/sensors
+    ${PROJECT_SOURCE_DIR}/managers
+)
+
+# Define source files
+set(SOURCES
+    src/main.cpp
+
+    # Sensors
+    src/sensors/sensor.cpp
+    src/sensors/tempSensor.cpp
+    src/sensors/rpmSensor.cpp
+    src/sensors/voltageSensor.cpp
+
+    # Managers
+    src/managers/sensorManager.cpp
+    src/managers/safetyManager.cpp
+)
+
+add_executable(diagnostics_app ${SOURCES})
+
+# Link libraries if needed (e.g., pthread, etc.)
+# target_link_libraries(diagnostics_app pthread)
