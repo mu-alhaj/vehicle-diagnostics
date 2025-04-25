@@ -21,3 +21,4 @@ void SafetyManager::checkSafety(){
     if ( temp > threshold_temp )
         cout << "warning - over temp " << temp << endl;
 }
+// test
