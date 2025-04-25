@@ -4,7 +4,6 @@
 #include <memory>
 #include "sensor.hpp"
 
-using namespace std;
 
 class SensorManager {
     vector<shared_ptr<Sensor>> sensors;

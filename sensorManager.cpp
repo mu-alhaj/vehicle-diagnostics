@@ -12,6 +12,8 @@ void SensorManager::readAll() {
     for ( const auto& sensor : sensors ){
         string name = sensor->getName();
         double value = sensor->readValue();
+
+        // here we can use a map to update readings.
         if ( name == "Temperature" ){
             this->temp = value;
         }
