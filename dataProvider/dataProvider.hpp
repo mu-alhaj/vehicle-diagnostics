@@ -1,8 +1,10 @@
 #pragma once
 
+#include "sensorManager.hpp"
+
 /*
     dataProvider: should be able to collect data from sensor manager, filter and process it if needed. And be ready to 
-    deliver it.
+    deliver it for concerned classes like safety manager, display etc.
 */
 
 class DataProvider {
@@ -11,6 +13,5 @@ class DataProvider {
     double temp     = 0.0;
 
 public:
-    void updateReadings( double voltage, double rpm, double temp );
-    void checkSafety();
+void updateData( SensorManager sm );
 };

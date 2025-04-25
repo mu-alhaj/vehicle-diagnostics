@@ -25,6 +25,9 @@ void SensorManager::readAll() {
         }
         cout << name << " : " << value << endl;
     }
+
+    // when all sensors are read, update the data provider.
+    callback( *this );
 }
 
 double SensorManager::getVoltage() const {
@@ -37,4 +40,8 @@ double SensorManager::getRpm() const {
 
 double SensorManager::getTemp() const {
     return this->temp;
+}
+
+void SensorManager::registerCallback( UpdateCallback cb ){
+    callback = cb;
 }

@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(
     ${PROJECT_SOURCE_DIR}/sensors
     ${PROJECT_SOURCE_DIR}/managers
+    ${PROJECT_SOURCE_DIR}/dataProvider
 )
 
 # Define source files
@@ -22,6 +23,9 @@ set(SOURCES
     # Managers
     src/managers/sensorManager.cpp
     src/managers/safetyManager.cpp
+
+    # Data Provider
+    src/dataProvider/dataProvider.cpp
 )
 
 add_executable(diagnostics_app ${SOURCES})
