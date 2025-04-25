@@ -11,7 +11,7 @@
 
 class SensorManager {
 
-using UpdateCallback = std::function<void(SensorManager&)>;
+using UpdateCallback = std::function<void(double v, double r, double t)>;
 
 public:
     void    addSensor( shared_ptr< Sensor > sensor );

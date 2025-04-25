@@ -11,9 +11,12 @@ void SafetyManager::updateReadings( double voltage, double rpm, double temp ){
     this->voltage = voltage;
     this->rpm = rpm;
     this->temp = temp;
+    cout << __FILE__ << " : " << __func__ << endl;
+    checkSafety();
 }
 
 void SafetyManager::checkSafety(){
+    cout << __FILE__ << " : " << __func__ << endl;
     if ( voltage > threshold_voltage )
         cout << "warning - over voltage " << voltage << endl;
     if ( rpm > threshold_rpm )

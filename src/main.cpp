@@ -17,17 +17,28 @@ int main() {
     SafetyManager safetyManager;
     DataProvider dataProvider;
 
-    sensorManager.registerCallback( std::bind(&DataProvider::updateData, &dataProvider, std::placeholders::_1) );
+    sensorManager.registerCallback( 
+        [&dataProvider]( double voltage, double rpm, double temp ){
+            dataProvider.updateData( voltage, rpm, temp );
+        }
+     );
     sensorManager.addSensor( std::make_shared<TemperatureSensor>() );
     sensorManager.addSensor( std::make_shared<RpmSensor>() );
     sensorManager.addSensor( std::make_shared<VoltageSensor>() );
+
+    dataProvider.addListner(
+        [&safetyManager]( double voltage, double rpm, double temp ){
+            safetyManager.updateReadings( voltage, rpm, temp );
+        }
+     );
 
     while (true) {
         system("clear"); // or "cls" on Windows
         std::cout << "\nVehicle Diagnostics:\n";
         sensorManager.readAll();
-        safetyManager.updateReadings( sensorManager.getVoltage(), sensorManager.getRpm(), sensorManager.getTemp() );
-        safetyManager.checkSafety();
+        // todo: these values should be retreived form data provider instead.
+        // safetyManager.updateReadings( sensorManager.getVoltage(), sensorManager.getRpm(), sensorManager.getTemp() );
+        // safetyManager.checkSafety();
         std::this_thread::sleep_for( std::chrono::seconds( 2 ) );
     }
 
