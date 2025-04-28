@@ -8,10 +8,11 @@
 #include <memory>
 #include "sensor.hpp"
 #include <functional>
+#include "commonTypes.hpp"
 
 class SensorManager {
 
-using UpdateCallback = std::function<void(double v, double r, double t)>;
+using UpdateCallback = std::function<void( SensorData data )>;
 
 public:
     void    addSensor( shared_ptr< Sensor > sensor );
@@ -24,8 +25,6 @@ public:
 private:
     vector<shared_ptr<Sensor>> sensors;
     UpdateCallback dataProviderUpdate_cb;
-    double voltage  = 0.0;
-    double rpm      = 0.0;
-    double temp     = 0.0;
+    SensorData sensorData;
 
 };

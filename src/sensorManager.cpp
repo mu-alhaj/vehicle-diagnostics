@@ -15,31 +15,31 @@ void SensorManager::readAll() {
 
         // here we can use a map to update readings.
         if ( name == "Temperature" ){
-            temp = value;
+            sensorData.temp = value;
         }
         if ( name == "RPM" ){
-            rpm = value;
+            sensorData.rpm = value;
         }
         if ( name == "Voltage" ){
-            voltage = value;
+            sensorData.voltage = value;
         }
     }
 
     cout << __FILE__ << " : " << __func__ << endl;
     // when all sensors are read, update the data provider.
-    dataProviderUpdate_cb( voltage, rpm, temp );
+    dataProviderUpdate_cb( sensorData );
 }
 
 double SensorManager::getVoltage() const {
-    return this->voltage;
+    return sensorData.voltage;
 }
 
 double SensorManager::getRpm() const {
-    return this->rpm;
+    return sensorData.rpm;
 }
 
 double SensorManager::getTemp() const {
-    return this->temp;
+    return sensorData.temp;
 }
 
 void SensorManager::registerCallback( UpdateCallback cb ){

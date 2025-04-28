@@ -5,9 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Define include directories for headers
 include_directories(
-    ${PROJECT_SOURCE_DIR}/sensors
-    ${PROJECT_SOURCE_DIR}/managers
-    ${PROJECT_SOURCE_DIR}/dataProvider
+    ${PROJECT_SOURCE_DIR}/includes
 )
 
 # Define source files
@@ -15,17 +13,18 @@ set(SOURCES
     src/main.cpp
 
     # Sensors
-    src/sensors/sensor.cpp
-    src/sensors/tempSensor.cpp
-    src/sensors/rpmSensor.cpp
-    src/sensors/voltageSensor.cpp
+    src/sensor.cpp
+    src/tempSensor.cpp
+    src/rpmSensor.cpp
+    src/voltageSensor.cpp
+    src/display.cpp
 
     # Managers
-    src/managers/sensorManager.cpp
-    src/managers/safetyManager.cpp
+    src/sensorManager.cpp
+    src/safetyManager.cpp
 
     # Data Provider
-    src/dataProvider/dataProvider.cpp
+    src/dataProvider.cpp
 )
 
 add_executable(diagnostics_app ${SOURCES})

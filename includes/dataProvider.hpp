@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include "commonTypes.hpp"
 
 /*
     dataProvider: should be able to collect data from sensor manager, filter and process it if needed. And be ready to 
@@ -9,16 +10,14 @@
 
 class DataProvider {
 
-using DataReadyCallback = std::function<void(int voltage, int rpm, int temp)>;
+using DataReadyCallback = std::function<void( SensorData data )>;
 
 private:
-    double voltage  = 0.0;
-    double rpm      = 0.0;
-    double temp     = 0.0;
+    SensorData m_collectedData;
 
 
 public:
     void addListner( DataReadyCallback cb );
-    void updateData( double v, double r, double t );
+    void updateData( SensorData data );
     std::vector<DataReadyCallback> listners;
 };

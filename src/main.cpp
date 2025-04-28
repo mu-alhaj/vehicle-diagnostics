@@ -9,6 +9,8 @@
 #include "tempSensor.hpp"
 #include "rpmSensor.hpp"
 #include "voltageSensor.hpp"
+#include "commonTypes.hpp"
+#include "display.hpp"
 
 
 
@@ -16,10 +18,11 @@ int main() {
     SensorManager sensorManager;
     SafetyManager safetyManager;
     DataProvider dataProvider;
+    Display display;
 
     sensorManager.registerCallback( 
-        [&dataProvider]( double voltage, double rpm, double temp ){
-            dataProvider.updateData( voltage, rpm, temp );
+        [&dataProvider]( SensorData data ){
+            dataProvider.updateData( data );
         }
      );
     sensorManager.addSensor( std::make_shared<TemperatureSensor>() );
@@ -27,18 +30,27 @@ int main() {
     sensorManager.addSensor( std::make_shared<VoltageSensor>() );
 
     dataProvider.addListner(
-        [&safetyManager]( double voltage, double rpm, double temp ){
-            safetyManager.updateReadings( voltage, rpm, temp );
+        [&safetyManager]( SensorData data ){
+            safetyManager.updateSensorData( data );
+        }
+     );
+
+     dataProvider.addListner(
+        [&display]( SensorData data ){
+            display.updateSensorData( data );
+        }
+     );
+
+     safetyManager.addListner(
+        [&display]( Warning w ){
+            display.updateWarnings( w );
         }
      );
 
     while (true) {
-        system("clear"); // or "cls" on Windows
-        std::cout << "\nVehicle Diagnostics:\n";
         sensorManager.readAll();
-        // todo: these values should be retreived form data provider instead.
-        // safetyManager.updateReadings( sensorManager.getVoltage(), sensorManager.getRpm(), sensorManager.getTemp() );
-        // safetyManager.checkSafety();
+        safetyManager.checkSafety();
+        display.show();
         std::this_thread::sleep_for( std::chrono::seconds( 2 ) );
     }
 
