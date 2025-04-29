@@ -77,7 +77,7 @@ int main() {
         sensorManager.readAll();
         safetyManager.checkSafety();
         display.show();
-        std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
+        std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     }
 
     return 0;
