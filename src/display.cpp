@@ -1,13 +1,15 @@
 #include "display.hpp"
 #include "iostream"
+#include "iomanip"
 
 using namespace std;
 
 
 void Display::updateSensorData( SensorData data ){
-    m_data.voltage  = data.voltage;
-    m_data.rpm      = data.rpm;
-    m_data.temp     = data.temp;
+    // m_data.voltage  = data.voltage;
+    // m_data.rpm      = data.rpm;
+    // m_data.temp     = data.temp;
+    m_data = data;
 }
 
 void Display::updateWarnings( Warning w ){
@@ -18,15 +20,18 @@ void Display::show(){
     system("clear"); // or "cls" on Windows
     // Display Banner
     cout << "===========================================" << endl;
-    cout << "           VEHICLE DIAGNOSTICS            " << endl;
+    cout << "           VEHICLE DIAGNOSTICS             " << endl;
     cout << "===========================================" << endl;
 
     // Display Sensor Data
     cout << "\nSensor Data:" << endl;
     cout << "--------------------------" << endl;
-    cout << "Voltage:       " << m_data.voltage << " V" << endl;
-    cout << "RPM:           " << m_data.rpm << " RPM" << endl;
-    cout << "Temperature:   " << m_data.temp << " C" << endl;
+    cout << "Load:          " << setw(10) << left << m_data.load << " % " << endl;
+    cout << "RPM:           " << setw(10) << left << m_data.rpm << " RPM " << endl;
+    cout << "Temperature:   " << setw(10) << left << m_data.temp << " C " << endl;
+    cout << "Fuel consump:  " << setw(10) << left << m_data.fuelConsumption << " L/H " << endl;
+    cout << "Voltage:       " << setw(10) << left << m_data.voltage << " V " << endl;
+    cout << "Oil Pressure:  " << setw(10) << left << m_data.oilPressure << " bar " << endl;
 
     // Display Active Warnings
     cout << "\nActive Warnings:" << endl;

@@ -3,9 +3,9 @@
 #include "sensor.hpp"
 
 
-class TemperatureSensor : public Sensor {
+class LoadSensor : public Sensor {
 public:
-    TemperatureSensor( std::shared_ptr<Engine> engine );
+    LoadSensor( std::shared_ptr<Engine> engine );
     SensorId getId() const override;
     double readValue() const override;
 

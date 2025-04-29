@@ -13,11 +13,13 @@ set(SOURCES
     src/main.cpp
 
     # Sensors
-    src/sensor.cpp
-    src/tempSensor.cpp
-    src/rpmSensor.cpp
-    src/voltageSensor.cpp
-    src/display.cpp
+    src/sensors/sensor.cpp
+    src/sensors/tempSensor.cpp
+    src/sensors/rpmSensor.cpp
+    src/sensors/voltageSensor.cpp
+    src/sensors/fuelConsumptionSensor.cpp 
+    src/sensors/oilPressureSensor.cpp 
+    src/sensors/loadSensor.cpp
 
     # Managers
     src/sensorManager.cpp
@@ -25,6 +27,12 @@ set(SOURCES
 
     # Data Provider
     src/dataProvider.cpp
+
+    # Engine
+    src/engine.cpp
+
+    # Display
+    src/display.cpp
 )
 
 add_executable(diagnostics_app ${SOURCES})

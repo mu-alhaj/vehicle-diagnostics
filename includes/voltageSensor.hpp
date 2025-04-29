@@ -6,6 +6,7 @@ using namespace std;
 
 class VoltageSensor : public Sensor {
 public:
-    string getName() const override;
+    VoltageSensor( std::shared_ptr<Engine> engine );
+    SensorId getId() const override;
     double readValue() const override;
 };

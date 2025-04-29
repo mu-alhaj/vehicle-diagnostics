@@ -12,9 +12,10 @@ void SafetyManager::addListner( NotifyWarningsCallback cb ){
 }
 
 void SafetyManager::updateSensorData( SensorData data ){
-    m_data.voltage  = data.voltage;
-    m_data.rpm      = data.rpm;
-    m_data.temp     = data.temp;
+    // m_data.voltage  = data.voltage;
+    // m_data.rpm      = data.rpm;
+    // m_data.temp     = data.temp;
+    m_data = data;
 }
 
 void SafetyManager::checkSafety() const{

@@ -23,8 +23,8 @@ public:
     void    registerCallback( UpdateCallback cb );
 
 private:
-    vector<shared_ptr<Sensor>> sensors;
-    UpdateCallback dataProviderUpdate_cb;
-    SensorData sensorData;
+    vector<shared_ptr<Sensor>> m_sensors;
+    UpdateCallback m_dataProviderUpdate_cb;
+    SensorData m_sensorData;
 
 };
