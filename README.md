@@ -24,6 +24,7 @@ mkdir build && cd build
 cmake ..
 make
 ./diagnostics_app
+```
 
 ## Concepts Demonstrated
 
