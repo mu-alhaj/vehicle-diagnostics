@@ -3,6 +3,14 @@ project(VehicleDiagnostics)
 
 set(CMAKE_CXX_STANDARD 17)
 
+set(BUILD_TESTING ON)
+
+# add_subdirectory for tests
+option(BUILD_TESTING "Build unit tests" ON)
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+endif()
+
 # Define include directories for headers
 include_directories(
     ${PROJECT_SOURCE_DIR}/includes
