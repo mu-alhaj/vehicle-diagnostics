@@ -4,5 +4,5 @@
 TEST(EngineTest, StartsWithZeroRPM) {
     Engine engine;
     engine.start();
-    EXPECT_EQ(engine.getRpm(), 1000);
+    EXPECT_EQ(engine.getRpm(), 0);
 }
