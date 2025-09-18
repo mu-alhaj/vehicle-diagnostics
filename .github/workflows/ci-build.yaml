@@ -1,0 +1,38 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout code
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # 2. Install dependencies
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential cmake
+
+    # 3. Create build directory
+    - name: Create build directory
+      run: mkdir -p build
+
+    # 4. Configure CMake and enable tests
+    - name: Configure CMake
+      run: cmake -S . -B build -DBUILD_TESTING=ON
+
+    # 5. Build project
+    - name: Build
+      run: cmake --build build
+
+    # 6. Run tests
+    - name: Run tests
+      run: ctest --test-dir build/tests --output-on-failure

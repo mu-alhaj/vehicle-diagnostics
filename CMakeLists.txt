@@ -1,9 +1,15 @@
+#   from root: VDS
+#   run to config cmake:
+#       cmake -S . -B build -DBUILD_TESTING=ON
+#   run to build applications:
+#       cmake --build build
+#   run to run tests:
+#       ctest --test-dir build/tests
+
 cmake_minimum_required(VERSION 3.10)
 project(VehicleDiagnostics)
 
 set(CMAKE_CXX_STANDARD 17)
-
-set(BUILD_TESTING ON)
 
 # Define include directories for headers
 include_directories(
