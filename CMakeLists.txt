@@ -5,43 +5,30 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(BUILD_TESTING ON)
 
-# add_subdirectory for tests
-option(BUILD_TESTING "Build unit tests" ON)
-if(BUILD_TESTING)
-    add_subdirectory(tests)
-endif()
-
 # Define include directories for headers
 include_directories(
     ${PROJECT_SOURCE_DIR}/includes
 )
 
-# Define source files
-set(SOURCES
-    src/main.cpp
+# Grab all cpp files in src/
+file(GLOB_RECURSE SOURCES src/*.cpp)
 
-    # Sensors
-    src/sensors/sensor.cpp
-    src/sensors/tempSensor.cpp
-    src/sensors/rpmSensor.cpp
-    src/sensors/voltageSensor.cpp
-    src/sensors/fuelConsumptionSensor.cpp 
-    src/sensors/oilPressureSensor.cpp 
-    src/sensors/loadSensor.cpp
+# Remove main.cpp , in order to make lib for testing.
+list(REMOVE_ITEM ALL_SOURCES src/main.cpp)
 
-    # Managers
-    src/sensorManager.cpp
-    src/safetyManager.cpp
+# add_subdirectory for tests
+option(BUILD_TESTING "Build unit tests" ON)
+if(BUILD_TESTING)
+    # make library of the source code.
+    add_library(diagnostics_lib ${SOURCES} )
+    target_include_directories(diagnostics_lib PUBLIC ${PROJECT_SOURCE_DIR}/includes)
+    
+    
+    add_subdirectory(tests)
+endif()
 
-    # Data Provider
-    src/dataProvider.cpp
-
-    # Engine
-    src/engine.cpp
-
-    # Display
-    src/display.cpp
-)
+# here we append main.cpp to the SOURCES before making executable
+list(APPEND SOURCES src/main.cpp)
 
 add_executable(diagnostics_app ${SOURCES})
 
