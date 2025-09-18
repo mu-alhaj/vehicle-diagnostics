@@ -1,5 +1,7 @@
 # Vehicle Diagnostics System (VDS)
 
+![Build Status](https://github.com/mu-alhaj/vehicle-diagnostics/actions/workflows/ci-build.yaml/badge.svg)
+
 A modular C++ simulation of a vehicle diagnostics system designed to demonstrate modern object-oriented principles, smart pointers, and clean architecture in a Linux-based C++ project. Sensors read from a simulated engine, data is distributed through a central provider, and safety checks and visual outputs are handled via independent components.
 
 ## Features
